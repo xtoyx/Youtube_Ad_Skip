@@ -3,7 +3,7 @@ import win32gui, win32ui, win32con ,win32api
 from ctypes import windll
 import time
 from threading import Thread, Lock
-# import pyautogui
+from alt_tab import WindowManager
 
 class WindowCapture:
 
@@ -163,6 +163,7 @@ class WindowCapture:
         perv_x=0
         perv_y=0
         # wincap.click(1176, 339)
+        #(4528 , 722)
         count=0
         for i in win32api.GetCursorPos():
             if count==0 :
@@ -170,31 +171,15 @@ class WindowCapture:
                 count+=1
             else :
                 perv_y=i
-       
-        # self.setForgground()
-        # time.sleep(1)
-        # self.setForgground()
-        # self.setForgground(win32gui.GetWindowText(self.hwnd))
-        # self.setForgground(perv_window)
-        win32api.SetCursorPos((x, y))
+        window_manager = WindowManager(self.hwnd,False)
+        perv_hwnd=window_manager.navigate_to_target()
+        win32api.SetCursorPos((x+300, y+250))
         time.sleep(0.5)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
         time.sleep(0.5)
-        win32api.SetCursorPos((perv_x, perv_y))
-    
-    # def setForgground(self):
-        # perv_window=win32gui.GetWindowText(win32gui.GetForegroundWindow())
-        # print(f"current_Window {perv_window}")
-        # for x in pyautogui.getAllWindows(): 
-        #     if x.title!="" :
-        #         print(x.title)
-        
-        # pyautogui.keyDown('alt')
-        # time.sleep(.2)
-        # pyautogui.press('tab')
-        # time.sleep(.2)
-        # pyautogui.keyUp('alt')
+        window_manager.navigate_back(perv_hwnd)
+        win32api.SetCursorPos((perv_x,perv_y))
 
     # threading methods
     def start(self):
