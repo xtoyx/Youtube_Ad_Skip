@@ -1,8 +1,8 @@
 Hello , so this an addon for youtube bot that skip ads when it see on 
 its working u need to install the requiments.txt 
 pip install -r requiments.txt
-<h4>**Solved**</h4>
-<h6>Slow script now it alot faster for now it just work with only the window in right side</h6>
+<h4>Solved</h4>
+<h5>Slow script now it alot faster for now it just work with only the window in right side</h5>
 
 <h4>Future plans</h4>
 <h6>Make it work in different sizes of windows - full size ,50% if it work and not buggy</h6>
