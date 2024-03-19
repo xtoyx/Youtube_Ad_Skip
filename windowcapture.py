@@ -81,7 +81,7 @@ class WindowCapture:
         window_rect = win32gui.GetWindowRect(self.hwnd)
     
         # Adjust window size based on DPI scaling factor
-        dpi_scale = 0.7 # DPI scaling factor
+        dpi_scale = 1 # DPI scaling factor , 1 for second screen , 0.7 for one 
         self.w = int((window_rect[2] - window_rect[0]) / dpi_scale)
         self.h = int((window_rect[3] - window_rect[1]) / dpi_scale)
 
@@ -173,11 +173,12 @@ class WindowCapture:
                 perv_y=i
         window_manager = WindowManager(self.hwnd,False)
         perv_hwnd=window_manager.navigate_to_target()
-        win32api.SetCursorPos((x+300, y+250))
-        time.sleep(0.5)
+        time.sleep(0.15)
+        win32api.SetCursorPos((x, y))
+        time.sleep(0.05)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
-        time.sleep(0.5)
+        time.sleep(0.1)
         window_manager.navigate_back(perv_hwnd)
         win32api.SetCursorPos((perv_x,perv_y))
 

@@ -1,6 +1,7 @@
 import win32gui
 import pyautogui
 import time
+pyautogui.FAILSAFE = False
 
 class WindowManager:
     # properties
@@ -32,11 +33,11 @@ class WindowManager:
 
     def switchforeground(self, mmm):
         pyautogui.keyDown('alt')
-        time.sleep(0.5*mmm)
+        time.sleep(0.15*mmm)
         for i in range(mmm):
             pyautogui.press('tab')
-            time.sleep(0.2)
-        time.sleep(0.2)
+            time.sleep(0.1)
+        time.sleep(0.1)
         self.finish()
 
     def whereisit(self, num, isitoff):
